@@ -149,7 +149,7 @@ ldr                         r7,r6,7
 BRnzp                       LOAD_RET
 
 PANTALLA        .FILL       xC000
-ANCHO           .FILL       128
+ANCHO           .FILL       128 
 ALTO            .FILL       124
 GUARDAR         .BLKW       8
 NEGATIVE_POS    .stRINGZ    "Sprite en posicion negativa"
