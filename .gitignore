@@ -1,1 +1,4 @@
 os/breakout.asm
+os/breakout.obj
+os/brics.asm
+os/brics.obj

@@ -1,0 +1,34 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	_PRINT_LINE       3014
+//	PRINT_IMAGE       3011
+//	SPRITE            30A3
+//	SAVE              3047
+//	GET_START_PIXEL   3027
+//	ERROR_NEGATIVE_POS  3041
+//	COLOR             300F
+//	_RET_SAVE_PRINT   3010
+//	CHECK             3030
+//	RENDER            3004
+//	POS_Y             30A0
+//	POS_X             30A1
+//	_PRINT_PIXEL      3015
+//	GUARDAR           305E
+//	SAVE_Y            3026
+//	ANCHO             305C
+//	ALTO              305D
+//	LOAD              3051
+//	NEGATIVE_POS      3066
+//	PANTALLA          305B
+//	LOAD_RET          300E
+//	_ADD_Y            3029
+//	_ADD_X            302D
+//	BACKGROUND        3197
+//	OVERFLOW_POS      3082
+//	ERROR_OVERFLOW_POS  3044
+//	EJ_COL            30A2
+//	SAVE_RET          3005
+//	_SKIP_INVISIBLE   3019
+

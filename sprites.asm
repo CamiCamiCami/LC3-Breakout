@@ -6,17 +6,20 @@
 ; Definase un pixel como la sifuente estructura
 ; invisible::1b, rojo::5b, verde::5b, azul::5b
 
-lea                         r0,SPRITE
+lea                         r0,HAMMER_SICKLE
 ld                          r1,POS_X
 ld                          r2,POS_Y
+ld                          r3,HAMMER_SICKLE_C
 
 
 ; Toma la direccion en memoria de un sprite (r0)
 ; Toma la posicion x de la esquina superior izquierda (r1)
 ; Toma la posicion y de la esquina superior izquierda (r2)
+; Toma el offset de color (r3)
 RENDER
 BRnzp                       SAVE
 SAVE_RET
+st                          r3,COLOR
 ldr                         r3,r0,0
 ldr                         r4,r0,1
 jsr                         CHECK
@@ -28,12 +31,19 @@ BRnzp                       LOAD
 LOAD_RET
 HALT
 
+; Offset de color
+COLOR              .BLKW    1
+
 
 ; Toma la dreccion de la imagen a printear (r0)
 ; Toma el ancho de un sprite (r3)
 ; Toma el alto de un sprite (r4)
 ; Toma la direccion donde empezar a escribir (r5)
+; Return guardado
+_RET_SAVE_PRINT    .BLKW    1 
 PRINT_IMAGE
+st                          r7,_RET_SAVE_PRINT
+ld                          r7,COLOR
 add                         r1,r4,0
 
 _PRINT_LINE
@@ -41,6 +51,7 @@ add                         r2,r3,0
 _PRINT_PIXEL
 ldr                         r6,r0,0
 BRn                         _SKIP_INVISIBLE
+add                         r6,r6,r7
 str                         r6,r5,0
 _SKIP_INVISIBLE
 add                         r0,r0,1
@@ -55,6 +66,7 @@ ld                          r6,ANCHO
 add                         r5,r5,r6
 add                         r1,r1,-1
 BRp                         _PRINT_LINE
+ld                          r7,_RET_SAVE_PRINT
 ret                    
 
 SAVE_Y        .BLKW         1
@@ -142,22 +154,4 @@ ALTO            .FILL       124
 GUARDAR         .BLKW       8
 NEGATIVE_POS    .stRINGZ    "Sprite en posicion negativa"
 OVERFLOW_POS    .stRINGZ    "Sprite se sale de la pantalla"
-
-; Ejemplo cubo blanco
-
-POS_Y           .FILL       60
-POS_X           .FILL       62
-SPRITE          .FILL       3
-                .FILL       3
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       xFFFF
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       x7FFF
-                .FILL       x7FFF
 
