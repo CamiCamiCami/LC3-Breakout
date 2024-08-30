@@ -9,11 +9,11 @@ add                     r0,r0,4
 
 MAIN_LOOP
 jsr                     PADDLE_UPDATE
-jsr                     RENDER_BACKGROUND
+jsr                     BACKGROUND_RENDER
 jsr                     PADDLE_RENDER
 brnzp                   MAIN_LOOP
 
-RENDER_BACKGROUND
+BACKGROUND_RENDER
 st                      r0,SAVE_R0
 st                      r1,SAVE_R1
 st                      r2,SAVE_R2
