@@ -1,0 +1,1 @@
+cat ../main.asm ../code/* ../include_resources.asm ../resources/* 1> brics.asm
