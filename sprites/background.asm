@@ -1,4 +1,4 @@
-BACKGROUND      .FILL       x0000
+__BACKGROUND    .FILL       x0000
                 .FILL       x0000
                 .FILL       x0000
                 .FILL       x0000
@@ -7934,4 +7934,3 @@ BACKGROUND      .FILL       x0000
                 .FILL       x0000
                 .FILL       x0000
                 .FILL       x0000
-

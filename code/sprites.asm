@@ -1,15 +1,8 @@
-.ORIG                       x3000
-
 ; Definase un sprite como la siguiente estructura
 ; ancho::int, alto::int, imagen::{row::{pixel}}
 ;   ---------------------------------------
 ; Definase un pixel como la sifuente estructura
 ; invisible::1b, rojo::5b, verde::5b, azul::5b
-
-lea                         r0,HAMMER_SICKLE
-ld                          r1,POS_X
-ld                          r2,POS_Y
-ld                          r3,HAMMER_SICKLE_C
 
 
 ; Toma la direccion en memoria de un sprite (r0)

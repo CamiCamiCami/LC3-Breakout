@@ -1,7 +1,4 @@
-POS_Y           .FILL       51
-POS_X           .FILL       53
-EJ_COL          .FILL       x0000
-SPRITE          .FILL       22
+__HMR_AND_SCKL  .FILL       22
                 .FILL       22
 
                 .FILL       xF000
@@ -257,3 +254,4 @@ SPRITE          .FILL       22
                 .FILL       xF000
                 .FILL       x7F40
                 .FILL       x7F40
+                

@@ -1,1 +1,0 @@
-cat sprites.asm resources/* 1> os/brics.asm
