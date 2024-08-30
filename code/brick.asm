@@ -12,33 +12,6 @@ ld                  r1,SAVE_R1
 ret
 
 ; Toma un puntero a un ladrillo (r0)
-BRICK_RENDER
-st                  r0,SAVE_R0
-st                  r1,SAVE_R1
-st                  r2,SAVE_R2
-st                  r3,SAVE_R3
-st                  r7,SAVE_R7
-
-ldr                 r1,r0,2
-brn                 __TERMINATE_RENDER
-lea                 r3,BRICK_COLORS
-add                 r3,r1,r3
-ldr                 r3,r3,0
-ldr                 r1,r0,0
-ldr                 r2,r0,1
-ld                  r0,BRICK_SPRITE
-jsr                 RENDER
-
-__TERMINATE_RENDER
-ld                  r0,SAVE_R0
-ld                  r1,SAVE_R1
-ld                  r2,SAVE_R2
-ld                  r3,SAVE_R3
-ld                  r7,SAVE_R7
-
-ret
-
-; Toma un puntero a un ladrillo (r0)
 ; Toma un puntero a una pelota (r1)
 ; Devuelve un booleano (r2)
 BRICK_CHECK_COLL
@@ -90,11 +63,32 @@ ld                  r5,SAVE_R5
 
 ret
 
+; Toma un puntero a un ladrillo (r0)
+BRICK_RENDER
+st                  r0,SAVE_R0
+st                  r1,SAVE_R1
+st                  r2,SAVE_R2
+st                  r3,SAVE_R3
+st                  r7,SAVE_R7
 
+ldr                 r1,r0,2
+brn                 __TERMINATE_RENDER
+lea                 r3,BRICK_COLORS
+add                 r3,r1,r3
+ldr                 r3,r3,0
+ldr                 r1,r0,0
+ldr                 r2,r0,1
+ld                  r0,BRICK_SPRITE
+jsr                 RENDER
 
-LADRILLO_EJ     .FILL   50
-                .FILL   100
-                .FILL   3
+__TERMINATE_RENDER
+ld                  r0,SAVE_R0
+ld                  r1,SAVE_R1
+ld                  r2,SAVE_R2
+ld                  r3,SAVE_R3
+ld                  r7,SAVE_R7
+
+ret
 
 BRICK_COLORS    .FILL   x03E0
                 .FILL   x7FE0
@@ -103,12 +97,3 @@ BRICK_COLORS    .FILL   x03E0
 
 BRICK_WIDTH     .FILL   16
 BRICK_HEIGHT    .FILL   4
-
-SAVE_R0         .BLKW   1
-SAVE_R1         .BLKW   1
-SAVE_R2         .BLKW   1
-SAVE_R3         .BLKW   1
-SAVE_R4         .BLKW   1
-SAVE_R5         .BLKW   1
-SAVE_R6         .BLKW   1
-SAVE_R7         .BLKW   1

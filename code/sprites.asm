@@ -22,7 +22,7 @@ add                         r0,r0,2
 jsr                         PRINT_IMAGE
 BRnzp                       LOAD
 LOAD_RET
-HALT
+ret
 
 ; Offset de color
 COLOR              .BLKW    1

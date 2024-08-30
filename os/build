@@ -1,1 +1,1 @@
-cat ../main.asm ../code/* ../import_sprites.asm ../sprites/* 1> brics.asm
+cat ../main.asm ../import_sprites.asm ../code/* ../sprites/* 1> brics.asm
