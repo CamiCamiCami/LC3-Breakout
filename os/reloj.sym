@@ -1,0 +1,9 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	inter             3007
+//	__loop            3002
+//	__exit            3005
+//	reloj             3006
+
