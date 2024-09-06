@@ -1,0 +1,5 @@
+clear
+reset
+as brics.asm
+load lc3os.obj
+load brics.obj

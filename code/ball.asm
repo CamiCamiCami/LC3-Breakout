@@ -7,4 +7,3 @@
 ; Toma la direccion de una pelota (r0)
 ; Toma el eje de rebote (r1)
 BALL_ON_COLLISION
-ret

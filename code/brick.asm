@@ -79,7 +79,7 @@ ldr                 r3,r3,0
 ldr                 r1,r0,0
 ldr                 r2,r0,1
 ld                  r0,BRICK_SPRITE
-jsr                 RENDER
+jsr                 RENDER_COLOR
 
 __TERMINATE_RENDER
 ld                  r0,SAVE_R0
