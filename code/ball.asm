@@ -6,4 +6,24 @@
 
 ; Toma la direccion de una pelota (r0)
 ; Toma el eje de rebote (r1)
+
 BALL_ON_COLLISION
+ret
+
+BALL_MOVE
+ret
+
+BALL_UNDO_MOVE
+ret
+
+BALL_MOVE_X
+ret
+
+BALL_UNDO_MOVE_X
+ret
+
+BALL_MOVE_Y
+ret
+
+BALL_UNDO_MOVE_Y
+ret

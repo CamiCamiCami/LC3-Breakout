@@ -94,6 +94,10 @@ ld                              r7,SAVE_R7
 ret
 
 
+PADDLE_CHECK_COLL
+ret
+
+
 HAS_KEYBOARD_INPUT      .FILL   xFE00
 KEYBOARD_INPUT          .FILL   xFE02
 A_ASCII                 .FILL   -97

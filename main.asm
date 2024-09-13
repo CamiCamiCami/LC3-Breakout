@@ -27,7 +27,105 @@ add                     r1,r1,-1
 brp                     __WAIT
 ret
 
-CLOCK           .FILL   xFE08
+
+; Toma la direccion en memoria de la pelota (r0)
+; Toma la paleta (r1)
+; Toma la direccion en memoria de la matriz de ladrillos (r2)
+; Toma la cantidad de ladrillos (r3)
+UPDATE
+st              r0,SAVE_R0
+st              r1,SAVE_R1
+st              r2,SAVE_R2
+st              r3,SAVE_R3
+st              r6,SAVE_R6
+st              r7,SAVE_R7
+
+jsr             BALL_UNRENDER
+ld              r0,SAVE_R1
+jsr             PADDLE_UNRENDER
+
+ld              r0,SAVE_R0
+jsr             BALL_UPDATE
+ld              r0,SAVE_R1
+jsr             PADDLE_UPDATE
+
+ld              r0,SAVE_R1
+ld              r1,SAVE_R0
+jsr             PADDLE_CHECK_COLL
+add             r2,r2,0
+BRnp            __HANDLE_PADDLE_COLL
+
+ld              r0,SAVE_R0
+jsr             CHECK_BORDER_COLL
+add             r1,r1,0
+BRnp            __HANDLE_BORDER_COLL
+
+ld              r6,BRICK_STRUCT_LEN
+ld              r0,SAVE_R2
+ld              r1,SAVE_R0
+__BRICKS_COLL_LOOP
+jsr             BRICK_CHECK_COLL
+add             r2,r2,0
+BRnp            __HANDLE_BRICK_COLL
+add             r0,r0,r6
+add             r3,r3,-1
+brp             __BRICKS_COLL_LOOP
+
+__AFTER_COLL_HANDLE
+ld              r0,SAVE_R0
+jsr             BALL_RENDER
+
+ld              r0,SAVE_R1
+jsr             PADDLE_RENDER
+
+ld              r0,SAVE_R0
+ld              r1,SAVE_R1
+ld              r2,SAVE_R2
+ld              r3,SAVE_R3
+ld              r6,SAVE_R6
+ld              r7,SAVE_R7
+
+ret
+
+
+__HANDLE_BORDER_COLL
+
+
+
+__HANDLE_PADDLE_COLL
+and             r3,r3,0
+ld              r0,SAVE_R0
+jsr             BALL_UNDO_MOVE_X
+add             r1,r0,0
+ld              r0,
+jsr             BRICK_CHECK_COLL
+add             r2,r2,0
+brp             
+ld              r2,LOW_UP
+add             r3,r2,r3
+__PDDL_NO_X
+jsr             BALL_UNDO_MOVE_Y
+jsr             BALL_MOVE_X
+jsr             
+
+
+
+__HANDLE_BRICK_COLL
+
+
+; Toma la direccion en memoria de la pelota (r0)
+; Devuelve un booleano (r1)
+CHECK_BORDER_COLL
+ret
+
+
+
+
+
+BRICK_STRUCT_LEN    .FILL   3
+CLOCK               .FILL   xFE08
+HIGH_UP             .FILL   xFF00
+LOW_UP              .FILL   x00FF
 
 SAVE_R0         .BLKW   1
 SAVE_R1         .BLKW   1
