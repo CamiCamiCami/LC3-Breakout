@@ -27,3 +27,42 @@ ret
 
 BALL_UNDO_MOVE_Y
 ret
+
+; toma la pelota (r0)
+BALL_RENDER
+st                              r0,SAVE_R0
+st                              r1,SAVE_R1
+st                              r2,SAVE_R2
+st                              r7,SAVE_R7
+
+ldr                             r1,r0,0
+ldr                             r2,r0,1
+ld                              r0,BALL_SPRITE
+
+jsr                             RENDER
+
+ld                              r0,SAVE_R0
+ld                              r1,SAVE_R1
+ld                              r2,SAVE_R2
+ld                              r7,SAVE_R7
+
+ret
+         
+BALL_UNRENDER
+st                              r0,SAVE_R0
+st                              r1,SAVE_R1
+st                              r2,SAVE_R2
+st                              r7,SAVE_R7
+
+ldr                             r1,r0,0
+ldr                             r2,r0,1
+ld                              r0,BALL_SPRITE
+
+jsr                             UNRENDER
+
+ld                              r0,SAVE_R0
+ld                              r1,SAVE_R1
+ld                              r2,SAVE_R2
+ld                              r7,SAVE_R7
+
+ret
