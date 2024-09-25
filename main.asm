@@ -53,9 +53,19 @@ add             r2,r2,0
 BRnp            __HANDLE_PADDLE_COLL
 
 ld              r0,SAVE_R0
-jsr             CHECK_BORDER_COLL
-add             r1,r1,0
-BRnp            __HANDLE_BORDER_COLL
+jsr             CHECK_WALL_LEFT_COLL
+add             r2,r2,0
+BRnp            __HANDLE_X_WALL_COLL
+jsr             CHECK_WALL_RGHT_COLL
+add             r2,r2,0
+BRnp            __HANDLE_X_WALL_COLL
+jsr             CHECK_WALL_UP_COLL
+add             r2,r2,0
+BRnp            __HANDLE_Y_WALL_COLL
+jsr             CHECK_WALL_DOWN_COLL
+add             r2,r2,0
+BRnp            __HANDLE_DEATH_COLL
+
 
 ld              r6,BRICK_STRUCT_LEN
 ld              r0,SAVE_R2
@@ -85,10 +95,18 @@ ld              r7,SAVE_R7
 ret
 
 
+__HANDLE_Y_WALL_COLL
+ld              r1,LOW_UP
+jsr             BALL_ON_COLLISION
+brnzp           __AFTER_COLL_HANDLE
 
+__HANDLE_X_WALL_COLL
+ld              r1,HIGH_UP
+jsr             BALL_ON_COLLISION
+brnzp           __AFTER_COLL_HANDLE
 
-__HANDLE_BORDER_COLL
-
+__HANDLE_DEATH_COLL
+HALT
 
 __HANDLE_BRICK_COLL
 and             r3,r3,0
@@ -129,6 +147,10 @@ CHECK_BORDER_COLL
 ret
 
 
+; Toma la pelota 
+CHECK_COLLISIONS
+
+
 
 
 
@@ -137,11 +159,11 @@ CLOCK               .FILL   xFE08
 HIGH_UP             .FILL   xFF00
 LOW_UP              .FILL   x00FF
 
-SAVE_R0         .BLKW   1
-SAVE_R1         .BLKW   1
-SAVE_R2         .BLKW   1
+SAVE_PELOTA     .BLKW   1
+SAVE_PALETA     .BLKW   1
+SAVE_LADRILLOS  .BLKW   1
 SAVE_R3         .BLKW   1
 SAVE_R4         .BLKW   1
 SAVE_R5         .BLKW   1
 SAVE_R6         .BLKW   1
-SAVE_R7         .BLKW   1
+SAVE_SALTO      .BLKW   1

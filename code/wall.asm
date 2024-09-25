@@ -1,5 +1,3 @@
-
-
 ; Toma la direccion en memoria de la pelota (r0)
 ; Devuelve si colisiono (r2)
 CHECK_WALL_LEFT_COLL    ; ball.x <= Wall.width -> 0 <= ball.x - Wall.width
