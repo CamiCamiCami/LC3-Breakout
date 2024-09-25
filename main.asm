@@ -41,12 +41,9 @@ st              r6,SAVE_R6
 st              r7,SAVE_R7
 
 jsr             BALL_UNRENDER
-ld              r0,SAVE_R1
-jsr             PADDLE_UNRENDER
-
-ld              r0,SAVE_R0
 jsr             BALL_UPDATE
 ld              r0,SAVE_R1
+jsr             PADDLE_UNRENDER
 jsr             PADDLE_UPDATE
 
 ld              r0,SAVE_R1
@@ -88,29 +85,42 @@ ld              r7,SAVE_R7
 ret
 
 
+
+
 __HANDLE_BORDER_COLL
+
+
+__HANDLE_BRICK_COLL
+and             r3,r3,0
+add             r6,r0,0     ; r6 guarda el ladrillo
+ld              r0,SAVE_R0
+jsr             BALL_UNDO_MOVE_X
+add             r5,r0,0     ; r5 guarda la pelota
+add             r0,r6,0     ; carga en r0 el ladrillo
+jsr             BRICK_CHECK_COLL
+add             r2,r2,0
+brz             __BRCK_NO_Y                     
+ld              r2,LOW_UP
+add             r3,r2,r3
+__BRCK_NO_Y
+add             r0,r5,0     ; carga en r0 la pelota
+jsr             BALL_UNDO_MOVE_Y
+jsr             BALL_MOVE_X
+add             r0,r6,0
+add             r1,r5,0
+jsr             BRICK_CHECK_COLL
+add             r2,r2,0
+ld              r2,HIGH_UP
+add             r3,r2,r3
+__BRCK_NO_X
+add             r0,r5,0
+add             r1,r3,0
+jsr             BALL_ON_COLLISION
+brnzp           __AFTER_COLL_HANDLE
 
 
 
 __HANDLE_PADDLE_COLL
-and             r3,r3,0
-ld              r0,SAVE_R0
-jsr             BALL_UNDO_MOVE_X
-add             r1,r0,0
-ld              r0,
-jsr             BRICK_CHECK_COLL
-add             r2,r2,0
-brp             
-ld              r2,LOW_UP
-add             r3,r2,r3
-__PDDL_NO_X
-jsr             BALL_UNDO_MOVE_Y
-jsr             BALL_MOVE_X
-jsr             
-
-
-
-__HANDLE_BRICK_COLL
 
 
 ; Toma la direccion en memoria de la pelota (r0)
