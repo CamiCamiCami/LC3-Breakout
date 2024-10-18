@@ -147,10 +147,43 @@ CHECK_BORDER_COLL
 ret
 
 
-; Toma la pelota 
 CHECK_COLLISIONS
+and             r6,r6,0
+jsr             _BORDER_COLL_WRAP
+add             r6,r6,r2
+
+add             r1,r0,0
+ld              r0,SAVE_PALETA
+jsr             CHE
 
 
+
+; Chequea colision con las paredes
+__BORDER_COLL_WRAP
+and             r2,r2,0
+ld              r0,SAVE_PELOTA
+jsr             CHECK_BORDER_COLL
+
+add             r2,r2,0
+brz             __BORDER_COLL_NOT
+
+jsr             BALL_UNDO_MOVE_X
+jsr             CHECK_BORDER_COLL
+add             r2,r2,0
+brz             __NOT_BORDER_COLL_Y
+add             r2,r2,1
+__NOT_BORDER_COLL_Y
+
+jsr             BALL_UNDO_MOVE_Y
+jsr             BALL_MOVE_X
+jsr             CHECK_BORDER_COLL
+add             r2,r2,0
+brz             __NOT_BORDER_COLL_X
+add             r1,r1,1
+__NOT_BORDER_COLL_X
+
+__BORDER_COLL_NOT
+ret
 
 
 
