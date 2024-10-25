@@ -8,25 +8,6 @@
 ; Toma la posicion x de la esquina superior izquierda (r1)
 ; Toma la posicion y de la esquina superior izquierda (r2)
 RENDER
-st                              r3,SPECIAL_R3_SAVE_SPRT
-st                              r7,SPECIAL_R7_SAVE_SPRT
-
-and                             r3,r3,0
-jsr                             RENDER_COLOR
-
-ld                              r3,SPECIAL_R3_SAVE_SPRT
-ld                              r7,SPECIAL_R7_SAVE_SPRT
-ret
-
-SPECIAL_R3_SAVE_SPRT    .BLKW   1
-SPECIAL_R7_SAVE_SPRT    .BLKW   1
-
-
-; Toma la direccion en memoria de un sprite (r0)
-; Toma la posicion x de la esquina superior izquierda (r1)
-; Toma la posicion y de la esquina superior izquierda (r2)
-; Toma el offset de color (r3)
-RENDER_COLOR
 st                              r0,SPRITE_SAVE_R0
 st                              r1,SPRITE_SAVE_R1
 st                              r2,SPRITE_SAVE_R2
