@@ -148,19 +148,27 @@ ret
 
 
 CHECK_COLLISIONS
+and             r5,r5,0
 and             r6,r6,0
-jsr             _BORDER_COLL_WRAP
+
+jsr             BORDER_COLL_WRAP
+add             r5,r5,r1
 add             r6,r6,r2
 
-add             r1,r0,0
-ld              r0,SAVE_PALETA
-jsr             CHE
+jsr             BORDER_COLL_WRAP
+add             r5,r5,r1
+add             r6,r6,r2
+
+
+
+
 
 
 
 ; Chequea colision con las paredes
-__BORDER_COLL_WRAP
+BORDER_COLL_WRAP
 and             r2,r2,0
+and             r1,r1,0
 ld              r0,SAVE_PELOTA
 jsr             CHECK_BORDER_COLL
 
@@ -171,21 +179,49 @@ jsr             BALL_UNDO_MOVE_X
 jsr             CHECK_BORDER_COLL
 add             r2,r2,0
 brz             __NOT_BORDER_COLL_Y
-add             r2,r2,1
+add             r1,r2,0
 __NOT_BORDER_COLL_Y
 
 jsr             BALL_UNDO_MOVE_Y
 jsr             BALL_MOVE_X
 jsr             CHECK_BORDER_COLL
-add             r2,r2,0
-brz             __NOT_BORDER_COLL_X
-add             r1,r1,1
-__NOT_BORDER_COLL_X
 
 __BORDER_COLL_NOT
 ret
 
+; Chequea colision con la paleta
+BORDER_COLL_WRAP
+and             r2,r2,0
+ld              r0,SAVE_PALETA
+ld              r1,SAVE_PELOTA
+jsr             PADDLE_CHECK_COLL
+add             r1,r2,0
+and             r2,r2,0
+ret
 
+; Chequea colision con las paredes
+BORDER_COLL_WRAP
+and             r2,r2,0
+and             r1,r1,0
+ld              r0,SAVE_PELOTA
+jsr             CHECK_BORDER_COLL
+
+add             r2,r2,0
+brz             __BORDER_COLL_NOT
+
+jsr             BALL_UNDO_MOVE_X
+jsr             CHECK_BORDER_COLL
+add             r2,r2,0
+brz             __NOT_BORDER_COLL_Y
+add             r1,r2,0
+__NOT_BORDER_COLL_Y
+
+jsr             BALL_UNDO_MOVE_Y
+jsr             BALL_MOVE_X
+jsr             CHECK_BORDER_COLL
+
+__BORDER_COLL_NOT
+ret
 
 BRICK_STRUCT_LEN    .FILL   3
 CLOCK               .FILL   xFE08
