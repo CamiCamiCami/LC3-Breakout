@@ -221,4 +221,3 @@ SPRITE_SAVE_R7          .BLKW   1
 
 NEGATIVE_POS            .stRINGZ    "Sprite en posicion negativa"
 OVERFLOW_POS            .stRINGZ    "Sprite se sale de la pantalla"
-
