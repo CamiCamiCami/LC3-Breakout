@@ -2,9 +2,9 @@
 ; x::int
 
 ; Toma una paleta (r0)
-PADDLE_UPDATE
-st                              r1,SAVE_R1
-st                              r2,SAVE_R2
+PADDLE_MOVE
+st                              r1,PADDLE_SAVE_R1
+st                              r2,PADDLE_SAVE_R2
 st                              r3,SAVE_R3
 
 add                             r3,r0,0
@@ -27,8 +27,8 @@ brz                             __PADDLE_GO_RIGHT
 __FINISH_UPDATE
 str                             r0,r3,0
 add                             r0,r3,0
-ld                              r1,SAVE_R1
-ld                              r2,SAVE_R2
+ld                              r1,PADDLE_SAVE_R1
+ld                              r2,PADDLE_SAVE_R2
 ld                              r3,SAVE_R3
 ret
 
@@ -62,10 +62,10 @@ brnzp                           __FINISH_UPDATE
 
 
 PADDLE_RENDER
-st                              r0,SAVE_R0
-st                              r1,SAVE_R1
-st                              r2,SAVE_R2
-st                              r7,SAVE_R7
+st                              r0,PADDLE_SAVE_R0
+st                              r1,PADDLE_SAVE_R1
+st                              r2,PADDLE_SAVE_R2
+st                              r7,PADDLE_SAVE_R7
 
 ldr                             r0,r0,0
 add                             r1,r0,0
@@ -74,19 +74,19 @@ ld                              r2,PADDLE_Y
 
 jsr                             RENDER
 
-ld                              r0,SAVE_R0
-ld                              r1,SAVE_R1
-ld                              r2,SAVE_R2
-ld                              r7,SAVE_R7
+ld                              r0,PADDLE_SAVE_R0
+ld                              r1,PADDLE_SAVE_R1
+ld                              r2,PADDLE_SAVE_R2
+ld                              r7,PADDLE_SAVE_R7
 
 ret
 
 
 PADDLE_UNRENDER
-st                              r0,SAVE_R0
-st                              r1,SAVE_R1
-st                              r2,SAVE_R2
-st                              r7,SAVE_R7
+st                              r0,PADDLE_SAVE_R0
+st                              r1,PADDLE_SAVE_R1
+st                              r2,PADDLE_SAVE_R2
+st                              r7,PADDLE_SAVE_R7
 
 ldr                             r0,r0,0
 add                             r1,r0,0
@@ -95,10 +95,10 @@ ld                              r2,PADDLE_Y
 
 jsr                             UNRENDER
 
-ld                              r0,SAVE_R0
-ld                              r1,SAVE_R1
-ld                              r2,SAVE_R2
-ld                              r7,SAVE_R7
+ld                              r0,PADDLE_SAVE_R0
+ld                              r1,PADDLE_SAVE_R1
+ld                              r2,PADDLE_SAVE_R2
+ld                              r7,PADDLE_SAVE_R7
 
 ret
 
@@ -106,12 +106,21 @@ ret
 PADDLE_CHECK_COLL
 ret
 
+PADDLE_SAVE_R0                  .BLKW   1
+PADDLE_SAVE_R1                  .BLKW   1
+PADDLE_SAVE_R2                  .BLKW   1
+PADDLE_SAVE_R3                  .BLKW   1
+PADDLE_SAVE_R4                  .BLKW   1
+PADDLE_SAVE_R5                  .BLKW   1
+PADDLE_SAVE_R6                  .BLKW   1
+PADDLE_SAVE_R7                  .BLKW   1
 
-HAS_KEYBOARD_INPUT      .FILL   xFE00
-KEYBOARD_INPUT          .FILL   xFE02
-A_ASCII                 .FILL   -97
-D_ASCII                 .FILL   -100
-PADDLE_VELOCITY         .FILL   1
-PADDLE_MAX_X            .FILL   108
-PADDLE_MIN_X            .FILL   0
-PADDLE_Y                .FILL   120
+
+HAS_KEYBOARD_INPUT              .FILL   xFE00
+KEYBOARD_INPUT                  .FILL   xFE02
+A_ASCII                         .FILL   -97
+D_ASCII                         .FILL   -100
+PADDLE_VELOCITY                 .FILL   1
+PADDLE_MAX_X                    .FILL   108
+PADDLE_MIN_X                    .FILL   0
+PADDLE_Y                        .FILL   120

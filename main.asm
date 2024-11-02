@@ -46,10 +46,10 @@ HALT
 UPDATE
 lea             r0,BALL
 jsr             BALL_UNRENDER
-jsr             BALL_UPDATE
+jsr             BALL_MOVE
 lea             r0,PADDLE
 jsr             PADDLE_UNRENDER
-jsr             PADDLE_UPDATE
+jsr             PADDLE_MOVE
 
 jsr             CHECK_COLLISIONS
 
@@ -128,21 +128,6 @@ add             r3,r3,-1
 brz             __BRICK_COLL_END
 ldr             r0,r3,0
 lea             r1,BALL
-jsr             CHECK_BORDER_COLL
-
-add             r2,r2,0
-brz             __BRICK_COLL_NOT
-
-jsr             BALL_UNDO_MOVE_X
-jsr             CHECK_BORDER_COLL
-add             r2,r2,0
-brz             __NOT_BORDER_COLL_Y
-add             r1,r2,0
-__NOT_BORDER_COLL_Y
-
-jsr             BALL_UNDO_MOVE_Y
-jsr             BALL_MOVE_X
-jsr             CHECK_BORDER_COLL
 
 __BRICK_COLL_NOT
 brnzp           __BRICKS_COLL_LOOP
