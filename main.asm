@@ -53,7 +53,10 @@ jsr             PADDLE_UPDATE
 
 jsr             CHECK_COLLISIONS
 
-or              r3,r2,r1
+not             r2,r2           ; |
+not             r1,r1           ; |  OR implementado con AND y NOT
+and             r3,r2,r1        ; |  (No existe OR nativo en LC3)
+not             r3,r3           ; |
 brz             __NO_COLLISION
 lea             r0,BALL
 jsr             BALL_ON_COLLISION
@@ -92,7 +95,7 @@ and             r1,r1,0
 and             r3,r3,0
 lea             r0,BALL
 jsr             CHECK_WALL_DOWN_COLL
-brnp            r2,GAME_OVER
+brnp            GAME_OVER
 
 jsr             CHECK_WALL_LEFT_COLL
 add             r3,r2,r3
@@ -130,7 +133,6 @@ jsr             CHECK_BORDER_COLL
 add             r2,r2,0
 brz             __BRICK_COLL_NOT
 
-add             r2,
 jsr             BALL_UNDO_MOVE_X
 jsr             CHECK_BORDER_COLL
 add             r2,r2,0

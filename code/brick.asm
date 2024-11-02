@@ -27,32 +27,32 @@ ldr                 r4,r1,0
 not                 r4,r4
 add                 r4,r4,1
 add                 r4,r4,r2
-brn                 __NO_COLLISION
+brn                 __BRICK_NO_COLLISION
 
 ldr                 r5,r1,1
 not                 r5,r5
 add                 r5,r5,1
 add                 r5,r5,r3
-brn                 __NO_COLLISION
+brn                 __BRICK_NO_COLLISION
 
 ld                  r2,BRICK_WIDTH
 not                 r2,r2
 add                 r2,r2,1
 add                 r4,r4,r2
-brp                 __NO_COLLISION
+brp                 __BRICK_NO_COLLISION
 
 ld                  r2,BRICK_HEIGHT
 not                 r2,r2
 add                 r2,r2,1
 add                 r5,r5,r2
-brp                 __NO_COLLISION
+brp                 __BRICK_NO_COLLISION
 
 __COLLISION_DETECTED
 and                 r2,r2,0
 add                 r2,r2,1
 brnzp               __END_CHK_COLL
 
-__NO_COLLISION
+__BRICK_NO_COLLISION
 and                 r2,r2,0
 
 __END_CHK_COLL
