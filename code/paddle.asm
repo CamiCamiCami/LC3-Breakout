@@ -1,10 +1,14 @@
 ; Definase una paleta como la siguiente estructura en memoria
-; Paleta = int
+; x::int
 
 ; Toma una paleta (r0)
 PADDLE_UPDATE
 st                              r1,SAVE_R1
 st                              r2,SAVE_R2
+st                              r3,SAVE_R3
+
+add                             r3,r0,0
+ldr                             r0,r0,0
 
 ld                              r1,HAS_KEYBOARD_INPUT
 ldr                             r1,r1,0
@@ -21,8 +25,11 @@ add                             r2,r2,r1
 brz                             __PADDLE_GO_RIGHT
 
 __FINISH_UPDATE
+str                             r0,r3,0
+add                             r0,r3,0
 ld                              r1,SAVE_R1
 ld                              r2,SAVE_R2
+ld                              r3,SAVE_R3
 ret
 
 __PADDLE_GO_LEFT
@@ -60,6 +67,7 @@ st                              r1,SAVE_R1
 st                              r2,SAVE_R2
 st                              r7,SAVE_R7
 
+ldr                             r0,r0,0
 add                             r1,r0,0
 ld                              r0,PADDLE_SPRITE
 ld                              r2,PADDLE_Y
@@ -80,6 +88,7 @@ st                              r1,SAVE_R1
 st                              r2,SAVE_R2
 st                              r7,SAVE_R7
 
+ldr                             r0,r0,0
 add                             r1,r0,0
 ld                              r0,PADDLE_SPRITE
 ld                              r2,PADDLE_Y

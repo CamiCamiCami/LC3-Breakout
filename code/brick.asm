@@ -11,25 +11,25 @@ str                 r1,r0,3
 ld                  r1,SAVE_R1
 ret
 
-; Toma un puntero a un ladrillo (r0)
-; Toma un puntero a una pelota (r1)
+; Toma un puntero a una pelota (r0)
+; Toma un puntero a un ladrillo (r1)
 ; Devuelve un booleano (r2)
 BRICK_CHECK_COLL
-st                  r1,SAVE_R1
+st                  r0,SAVE_R0
 st                  r3,SAVE_R3
 st                  r4,SAVE_R4
 st                  r5,SAVE_R5
 
-ldr                 r2,r1,0
-ldr                 r3,r1,1
+ldr                 r2,r0,0
+ldr                 r3,r0,1
 
-ldr                 r4,r0,0
+ldr                 r4,r1,0
 not                 r4,r4
 add                 r4,r4,1
 add                 r4,r4,r2
 brn                 __NO_COLLISION
 
-ldr                 r5,r0,1
+ldr                 r5,r1,1
 not                 r5,r5
 add                 r5,r5,1
 add                 r5,r5,r3
@@ -56,7 +56,7 @@ __NO_COLLISION
 and                 r2,r2,0
 
 __END_CHK_COLL
-ld                  r1,SAVE_R1
+ld                  r0,SAVE_R0
 ld                  r3,SAVE_R3
 ld                  r4,SAVE_R4
 ld                  r5,SAVE_R5
