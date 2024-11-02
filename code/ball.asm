@@ -1,5 +1,5 @@
 ; Definase una pelota como la siguiente estructura en memoria
-; x::int, y::int, vx::int, vy::int
+; x::racional8, y::racional8, vx::racional8, vy::racional8
 
 ; Toma la direccion de una pelota (r0)
 ; Toma el rebote en Y (r1)
@@ -120,43 +120,6 @@ ld              r1,BALL_SAVE_R1
 ld              r2,BALL_SAVE_R2
 ret
 
-; toma la pelota (r0)
-BALL_RENDER
-st                              r0,BALL_SAVE_R0
-st                              r1,BALL_SAVE_R1
-st                              r2,BALL_SAVE_R2
-st                              r7,BALL_SAVE_R7
-
-ldr                             r1,r0,0
-ldr                             r2,r0,1
-ld                              r0,BALL_SPRITE
-
-jsr                             RENDER
-
-ld                              r0,BALL_SAVE_R0
-ld                              r1,BALL_SAVE_R1
-ld                              r2,BALL_SAVE_R2
-ld                              r7,BALL_SAVE_R7
-ret
-         
-BALL_UNRENDER
-st                              r0,BALL_SAVE_R0
-st                              r1,BALL_SAVE_R1
-st                              r2,BALL_SAVE_R2
-st                              r7,BALL_SAVE_R7
-
-ldr                             r1,r0,0
-ldr                             r2,r0,1
-ld                              r0,BALL_SPRITE
-
-jsr                             UNRENDER
-
-ld                              r0,BALL_SAVE_R0
-ld                              r1,BALL_SAVE_R1
-ld                              r2,BALL_SAVE_R2
-ld                              r7,BALL_SAVE_R7
-ret
-
 
 BALL_SAVE_R0                    .BLKW   1
 BALL_SAVE_R1                    .BLKW   1
@@ -166,6 +129,3 @@ BALL_SAVE_R4                    .BLKW   1
 BALL_SAVE_R5                    .BLKW   1
 BALL_SAVE_R6                    .BLKW   1
 BALL_SAVE_R7                    .BLKW   1
-
-BALL_WIDTH                      .FILL   3
-BALL_HEIGHT                     .FILL   3

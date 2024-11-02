@@ -61,46 +61,7 @@ brnzp                           __FINISH_UPDATE
 ; Toma un paleta (r0)
 
 
-PADDLE_RENDER
-st                              r0,PADDLE_SAVE_R0
-st                              r1,PADDLE_SAVE_R1
-st                              r2,PADDLE_SAVE_R2
-st                              r7,PADDLE_SAVE_R7
 
-ldr                             r0,r0,0
-add                             r1,r0,0
-ld                              r0,PADDLE_SPRITE
-ld                              r2,PADDLE_Y
-
-jsr                             RENDER
-
-ld                              r0,PADDLE_SAVE_R0
-ld                              r1,PADDLE_SAVE_R1
-ld                              r2,PADDLE_SAVE_R2
-ld                              r7,PADDLE_SAVE_R7
-
-ret
-
-
-PADDLE_UNRENDER
-st                              r0,PADDLE_SAVE_R0
-st                              r1,PADDLE_SAVE_R1
-st                              r2,PADDLE_SAVE_R2
-st                              r7,PADDLE_SAVE_R7
-
-ldr                             r0,r0,0
-add                             r1,r0,0
-ld                              r0,PADDLE_SPRITE
-ld                              r2,PADDLE_Y
-
-jsr                             UNRENDER
-
-ld                              r0,PADDLE_SAVE_R0
-ld                              r1,PADDLE_SAVE_R1
-ld                              r2,PADDLE_SAVE_R2
-ld                              r7,PADDLE_SAVE_R7
-
-ret
 
 
 PADDLE_CHECK_COLL
@@ -123,4 +84,3 @@ D_ASCII                         .FILL   -100
 PADDLE_VELOCITY                 .FILL   1
 PADDLE_MAX_X                    .FILL   108
 PADDLE_MIN_X                    .FILL   0
-PADDLE_Y                        .FILL   120
