@@ -68,4 +68,3 @@ __BRICK_SPRITE          .FILL   16
                         .FILL   x0000
                         .FILL   x0000
                         .FILL   x8000
-                        
