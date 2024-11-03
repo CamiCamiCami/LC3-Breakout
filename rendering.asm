@@ -25,17 +25,19 @@ ld                              r2,RENDERING_SAVE_R2
 ld                              r7,RENDERING_SAVE_R7
 ret
          
+; toma x e y
 BALL_UNRENDER
 st                              r0,RENDERING_SAVE_R0
 st                              r1,RENDERING_SAVE_R1
 st                              r2,RENDERING_SAVE_R2
 st                              r7,RENDERING_SAVE_R7
 
-ldr                             r1,r0,1
+jsr                             BITSHIFT8_RIGTH
+add                             r0,r1,0
+add                             r1,r2,0
 jsr                             BITSHIFT8_RIGTH
 add                             r2,r1,0
-ldr                             r1,r0,0
-jsr                             BITSHIFT8_RIGTH
+add                             r1,r0,0
 ld                              r0,BALL_SPRITE
 
 jsr                             UNRENDER
@@ -79,6 +81,25 @@ ld                  r7,RENDERING_SAVE_R7
 
 ret
 
+BRICK_UNRENDER
+st                              r0,RENDERING_SAVE_R0
+st                              r1,RENDERING_SAVE_R1
+st                              r2,RENDERING_SAVE_R2
+st                              r7,RENDERING_SAVE_R7
+
+ldr                             r1,r0,0
+ldr                             r2,r0,1
+ld                              r0,BRICK_SPRITE
+
+jsr                             UNRENDER
+
+ld                              r0,RENDERING_SAVE_R0
+ld                              r1,RENDERING_SAVE_R1
+ld                              r2,RENDERING_SAVE_R2
+ld                              r7,RENDERING_SAVE_R7
+
+ret
+
 PADDLE_RENDER
 st                              r0,RENDERING_SAVE_R0
 st                              r1,RENDERING_SAVE_R1
@@ -99,23 +120,17 @@ ld                              r7,RENDERING_SAVE_R7
 
 ret
 
-
+; toma x e y
 PADDLE_UNRENDER
 st                              r0,RENDERING_SAVE_R0
-st                              r1,RENDERING_SAVE_R1
-st                              r2,RENDERING_SAVE_R2
 st                              r7,RENDERING_SAVE_R7
 
-ldr                             r0,r0,0
-add                             r1,r0,0
 ld                              r0,PADDLE_SPRITE
 ld                              r2,PADDLE_Y
 
 jsr                             UNRENDER
 
 ld                              r0,RENDERING_SAVE_R0
-ld                              r1,RENDERING_SAVE_R1
-ld                              r2,RENDERING_SAVE_R2
 ld                              r7,RENDERING_SAVE_R7
 
 ret

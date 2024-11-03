@@ -2,14 +2,29 @@
 ; x::int, y::int, muerto::1b, estado::15b
 
 
-; Toma un puntero a un ladrillo (r0)
+; Toma un puntero a un ladrillo (r1)
 BRICK_ON_COLLISION
-st                  r1,BRICKS_SAVE_R1
-ldr                 r1,r0,3
-add                 r1,r1,-1
-str                 r1,r0,3
-ld                  r1,BRICKS_SAVE_R1
+st                  r0,BRICKS_SAVE_R0
+st                  r7,BRICKS_SAVE_R7
+ldr                 r0,r1,2
+add                 r0,r0,-1
+str                 r0,r1,2
+brnz                __UNRENDER_DEAD_BRCK
+brp                 __RERENDER_BRICK
+__RENDER_WRAP_RETURN
+ld                  r0,BRICKS_SAVE_R0
+ld                  r7,BRICKS_SAVE_R7
 ret
+
+__UNRENDER_DEAD_BRCK
+add                 r0,r1,0
+jsr                 BRICK_UNRENDER
+brnzp               __RENDER_WRAP_RETURN
+
+__RERENDER_BRICK
+add                 r0,r1,0
+jsr                 BRICK_RENDER
+brnzp               __RENDER_WRAP_RETURN
 
 ; Toma un puntero a una pelota (r0)
 ; Toma un puntero a un ladrillo (r1)
@@ -21,6 +36,9 @@ st                  r3,BRICKS_SAVE_R3
 st                  r4,BRICKS_SAVE_R4
 st                  r5,BRICKS_SAVE_R5
 st                  r7,BRICKS_SAVE_R7
+
+ldr                 r1,r1,2
+brn                 __BRICK_NO_COLLISION
 
 ldr                 r1,r0,0
 jsr                 BITSHIFT8_RIGTH
