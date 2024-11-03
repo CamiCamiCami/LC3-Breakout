@@ -1,5 +1,6 @@
 ; Definase un ladrillo como la siguiente estructura en memoria
 ; x::int, y::int, muerto::1b, estado::15b
+; las coordenadas x, y refieren a la ezquina superior izquerda del bloque
 
 
 ; Toma un puntero a un ladrillo (r1)
@@ -40,33 +41,29 @@ st                  r7,BRICKS_SAVE_R7
 ldr                 r1,r1,2
 brn                 __BRICK_NO_COLLISION
 
-ldr                 r1,r0,0
-jsr                 BITSHIFT8_RIGTH
-add                 r2,r1,0
-ldr                 r1,r0,1
-jsr                 BITSHIFT8_RIGTH
-add                 r3,r1,0
-ld                  r1,BRICKS_SAVE_R1
-
-ldr                 r4,r1,0
+; verifica si la pelota está a la izquierda del bloque
+ldr                 r4,r0,0
 not                 r4,r4
-add                 r4,r4,1
+add                 r4,r4,4
 add                 r4,r4,r2
 brn                 __BRICK_NO_COLLISION
 
-ldr                 r5,r1,1
+; verifica si la pelota está arriba del bloque
+ldr                 r5,r0,1
 not                 r5,r5
-add                 r5,r5,1
+add                 r5,r5,4
 add                 r5,r5,r3
 brn                 __BRICK_NO_COLLISION
 
 ld                  r2,BRICK_WIDTH
+add                 r2,r2,4
 not                 r2,r2
 add                 r2,r2,1
 add                 r4,r4,r2
 brp                 __BRICK_NO_COLLISION
 
 ld                  r2,BRICK_HEIGHT
+add                 r2,r2,4
 not                 r2,r2
 add                 r2,r2,1
 add                 r5,r5,r2
@@ -104,3 +101,8 @@ BRICKS_SAVE_R7      .BLKW   1
 
 BRICK_WIDTH     .FILL   16
 BRICK_HEIGHT    .FILL   4
+
+
+BRICK           .FILL   4
+                .FILL   10
+                .FILL   3

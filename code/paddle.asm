@@ -60,12 +60,36 @@ brnzp                           __FINISH_UPDATE
 
 ; Toma un paleta (r0)
 
+ldr                 r2,r1,0
+ldr                 r3,r1,1
+
+; Revisa si la pelota está a la altura de la paleta
+PADDLE_CHECK_Y
+ld                              r4,PADDLE_Y
+not                             r4,r4
+add                             r4,r4,5
+add                             r4,r3,r4
+brzp                            PADDLE_SAME_Y
+
+PADDLE_CHECK_COLL
+not                             r0,r0
+add                             r0,r0,4
+add                             r5,r2,r0
+brn                             PADDLE_COLLISION
+
+ld                              r4,PADDLE_WIDTH
+add                             r4,r0,r4
+not                             r4,r4
+add                             r4,r4,1
+add                             r4,r2,r4
+brn                             PADDLE_COLLISION
 
 
 
 
 PADDLE_CHECK_COLL
 ret
+
 
 PADDLE_SAVE_R0                  .BLKW   1
 PADDLE_SAVE_R1                  .BLKW   1
