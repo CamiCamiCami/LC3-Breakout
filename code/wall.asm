@@ -88,7 +88,7 @@ not                     r0,r0
 add                     r0,r0,1
 ld                      r2,ALTO
 add                     r0,r2,r0
-brnz                    __WALL_DOWN_COLLIDED                                          
+brnz                    __WALL_DOWN_COLLIDED
 and                     r2,r2,0
 __WALL_DOWN_COLLIDED
 ld                      r0,WALL_SAVE_R0
