@@ -155,20 +155,20 @@ __NO_COLLISION
 
 lea             r0,BALL
 ld              r1,UPDATE_BALL_OLD_X
-jsr             BITSHIFT8_RIGTH
+jsr             BITSHIFT8_RIGHT
 add             r2,r1,0
 ldr             r1,r0,0
-jsr             BITSHIFT8_RIGTH
+jsr             BITSHIFT8_RIGHT
 not             r2,r2
 add             r2,r2,1
 add             r1,r2,r1
 brnp            __BALL_RERENDER
 
 ld              r1,UPDATE_BALL_OLD_Y
-jsr             BITSHIFT8_RIGTH
+jsr             BITSHIFT8_RIGHT
 add             r2,r1,0
 ldr             r1,r0,1
-jsr             BITSHIFT8_RIGTH
+jsr             BITSHIFT8_RIGHT
 not             r2,r2
 add             r2,r2,1
 add             r1,r2,r1

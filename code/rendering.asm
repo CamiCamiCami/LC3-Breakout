@@ -16,10 +16,10 @@ st                              r2,RENDERING_SAVE_R2
 st                              r7,RENDERING_SAVE_R7
 
 ldr                             r1,r0,1
-jsr                             BITSHIFT8_RIGTH
+jsr                             BITSHIFT8_RIGHT
 add                             r2,r1,0
 ldr                             r1,r0,0
-jsr                             BITSHIFT8_RIGTH
+jsr                             BITSHIFT8_RIGHT
 ld                              r0,BALL_SPRITE
 
 jsr                             RENDER
@@ -37,10 +37,10 @@ st                              r1,RENDERING_SAVE_R1
 st                              r2,RENDERING_SAVE_R2
 st                              r7,RENDERING_SAVE_R7
 
-jsr                             BITSHIFT8_RIGTH
+jsr                             BITSHIFT8_RIGHT
 add                             r0,r1,0
 add                             r1,r2,0
-jsr                             BITSHIFT8_RIGTH
+jsr                             BITSHIFT8_RIGHT
 add                             r2,r1,0
 add                             r1,r0,0
 ld                              r0,BALL_SPRITE

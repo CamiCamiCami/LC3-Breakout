@@ -85,7 +85,7 @@ ld                              r1,PANTALLA
 not                             r1,r1
 add                             r1,r1,1
 add                             r1,r1,r5
-jsr                             BITSHIFT2_RIGTH
+jsr                             BITSHIFT2_RIGHT
 ld                              r0,BACKGROUND_IMAGE
 add                             r0,r0,r1
 add                             r1,r6,0
@@ -123,7 +123,7 @@ ld                              r1,PANTALLA
 not                             r1,r1
 add                             r1,r1,1
 add                             r1,r1,r5
-jsr                             BITSHIFT2_RIGTH
+jsr                             BITSHIFT2_RIGHT
 ld                              r0,BACKGROUND_IMAGE
 add                             r0,r0,r1
 add                             r1,r6,0
@@ -234,7 +234,7 @@ str                             r6,r3,3
 
 add                             r6,r1,0
 add                             r1,r4,0
-jsr                             BITSHIFT4_RIGTH
+jsr                             BITSHIFT4_RIGHT
 lea                             r7,MATRIZ_COLORES
 add                             r4,r1,0
 add                             r1,r6,0
@@ -247,7 +247,7 @@ str                             r6,r3,2
 
 add                             r6,r1,0
 add                             r1,r4,0
-jsr                             BITSHIFT4_RIGTH
+jsr                             BITSHIFT4_RIGHT
 lea                             r7,MATRIZ_COLORES
 add                             r4,r1,0
 add                             r1,r6,0
@@ -260,7 +260,7 @@ str                             r6,r3,1
 
 add                             r6,r1,0
 add                             r1,r4,0
-jsr                             BITSHIFT4_RIGTH
+jsr                             BITSHIFT4_RIGHT
 lea                             r7,MATRIZ_COLORES
 add                             r4,r1,0
 add                             r1,r6,0

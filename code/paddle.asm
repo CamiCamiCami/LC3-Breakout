@@ -69,10 +69,10 @@ st                              r6,PADDLE_SAVE_R6
 st                              r7,PADDLE_SAVE_R7
 
 ldr                             r1,r0,0
-jsr                             BITSHIFT8_RIGTH
+jsr                             BITSHIFT8_RIGHT
 add                             r2,r1,0
 ldr                             r1,r0,1
-jsr                             BITSHIFT8_RIGTH
+jsr                             BITSHIFT8_RIGHT
 add                             r3,r1,0
 
 ld                              r1,PADDLE_SAVE_R1

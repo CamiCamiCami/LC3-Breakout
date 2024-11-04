@@ -6,7 +6,7 @@ st                      r1,WALL_SAVE_R1
 st                      r7,WALL_SAVE_R7
 
 ldr                     r1,r0,0
-jsr                     BITSHIFT8_RIGTH
+jsr                     BITSHIFT8_RIGHT
 add                     r0,r1,0
 
 ld                      r2,WALL_WIDTH
@@ -29,7 +29,7 @@ st                      r1,WALL_SAVE_R1
 st                      r7,WALL_SAVE_R7
 
 ldr                     r1,r0,0
-jsr                     BITSHIFT8_RIGTH
+jsr                     BITSHIFT8_RIGHT
 add                     r0,r1,0
 
 ld                      r2,WALL_WIDTH
@@ -57,7 +57,7 @@ st                      r1,WALL_SAVE_R1
 st                      r7,WALL_SAVE_R7
 
 ldr                     r1,r0,1
-jsr                     BITSHIFT8_RIGTH
+jsr                     BITSHIFT8_RIGHT
 add                     r0,r1,0
 
 ld                      r2,WALL_WIDTH
@@ -80,7 +80,7 @@ st                      r1,WALL_SAVE_R1
 st                      r7,WALL_SAVE_R7
 
 ldr                     r1,r0,1
-jsr                     BITSHIFT8_RIGTH
+jsr                     BITSHIFT8_RIGHT
 add                     r0,r1,0
 
 ld                      r2,BALL_HEIGHT_PTR

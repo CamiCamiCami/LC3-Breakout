@@ -1,7 +1,7 @@
 
 MASK1                           .FILL   b0000000000000001
 MASK2                           .FILL   b0000000100000000
-BITSHIFT8_RIGTH
+BITSHIFT8_RIGHT
 st                              r2,MISC_SAVE_R2
 st                              r3,MISC_SAVE_R3
 st                              r4,MISC_SAVE_R4
@@ -29,7 +29,7 @@ ret
 
 MASK3                           .FILL   b0000000000000001
 MASK4                           .FILL   b0000000000010000
-BITSHIFT4_RIGTH
+BITSHIFT4_RIGHT
 st                              r2,MISC_SAVE_R2
 st                              r3,MISC_SAVE_R3
 st                              r4,MISC_SAVE_R4
@@ -57,7 +57,7 @@ ret
 
 MASK5                           .FILL   b0000000000000001
 MASK6                           .FILL   b0000000000000100
-BITSHIFT2_RIGTH
+BITSHIFT2_RIGHT
 st                              r2,MISC_SAVE_R2
 st                              r3,MISC_SAVE_R3
 st                              r4,MISC_SAVE_R4
