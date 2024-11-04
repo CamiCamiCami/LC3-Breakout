@@ -1,7 +1,12 @@
 HMR_AND_SCKL        .FILL   __HMR_AND_SCKL
-BRICK_SPRITE        .FILL   __BRICK_SPRITE
 PADDLE_SPRITE       .FILL   __PADDLE_SPRITE
 BALL_SPRITE         .FILL   __BALL_SPRITE
+
+BRICK_SPRITES       .FILL   __GRN_BRICK_SPRITE
+                    .FILL   __YEL_BRICK_SPRITE
+                    .FILL   __ORN_BRICK_SPRITE
+                    .FILL   __RED_BRICK_SPRITE
+
 
 ; toma la pelota (r0)
 BALL_RENDER
@@ -62,15 +67,14 @@ st                  r2,RENDERING_SAVE_R2
 st                  r3,RENDERING_SAVE_R3
 st                  r7,RENDERING_SAVE_R7
 
-ldr                 r1,r0,2
-brn                 __TERMINATE_RENDER
-lea                 r3,BRICK_COLORS
-add                 r3,r1,r3
-ldr                 r3,r3,0
 ldr                 r1,r0,0
 ldr                 r2,r0,1
-ld                  r0,BRICK_SPRITE
-jsr                 RENDER_COLOR
+ldr                 r3,r0,2
+brn                 __TERMINATE_RENDER
+lea                 r0,BRICK_SPRITES
+add                 r0,r3,r0
+ldr                 r0,r0,0
+jsr                 RENDER
 
 __TERMINATE_RENDER
 ld                  r0,RENDERING_SAVE_R0
@@ -89,7 +93,7 @@ st                              r7,RENDERING_SAVE_R7
 
 ldr                             r1,r0,0
 ldr                             r2,r0,1
-ld                              r0,BRICK_SPRITE
+ld                              r0,BRICK_SPRITES
 
 jsr                             UNRENDER
 
@@ -147,7 +151,4 @@ RENDERING_SAVE_R7               .BLKW   1
 
 PADDLE_Y                        .FILL   120
 
-BRICK_COLORS    .FILL   x03E0
-                .FILL   x7FE0
-                .FILL   x7DE0
-                .FILL   x7C00
+

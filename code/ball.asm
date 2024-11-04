@@ -121,6 +121,9 @@ ld              r2,BALL_SAVE_R2
 ret
 
 
+BALL_HEIGHT                     .FILL   3
+BALL_WIDTH                      .FILL   3
+
 BALL_SAVE_R0                    .BLKW   1
 BALL_SAVE_R1                    .BLKW   1
 BALL_SAVE_R2                    .BLKW   1

@@ -1,6 +1,8 @@
                         .ORIG   x3000
 
 SETUP
+jsr             RENDER_BACKGROUND
+
 lea             r0,BRICKS
 ld              r1,BRICK_MATRIX_LEN
 ld              r2,BRICK_STRUCT_SIZE
@@ -11,17 +13,34 @@ add             r0,r0,r2
 add             r1,r1,-1
 brp             __BRICKS_INIT_LOOP
 
+lea                     r0,BALL
+jsr                     BALL_RENDER
+lea                     r0,PADDLE
+jsr                     PADDLE_RENDER
+
 brnzp                   MAIN_LOOP
 
 
 BALL                    .FILL   b0100000000000000
                         .FILL   b0110010000000000
-                        .FILL   b0000000010000000
-                        .FILL   b1111111110000000
+                        .FILL   b0000000110000000
+                        .FILL   b1111111010000000
 
 PADDLE                  .FILL   64
 
-BRICKS                  .FILL   35
+BRICKS                  .FILL   16
+                        .FILL   40
+                        .FILL   3
+
+                        .FILL   32
+                        .FILL   40
+                        .FILL   3
+
+                        .FILL   48
+                        .FILL   40
+                        .FILL   3
+
+                        .FILL   64
                         .FILL   40
                         .FILL   3
 
@@ -29,11 +48,59 @@ BRICKS                  .FILL   35
                         .FILL   40
                         .FILL   3
 
-                        .FILL   100
+                        .FILL   96
                         .FILL   40
+                        .FILL   3  
+
+                        .FILL   16
+                        .FILL   44
                         .FILL   3
 
-BRICK_MATRIX_LEN        .FILL   3
+                        .FILL   32
+                        .FILL   44
+                        .FILL   3
+
+                        .FILL   48
+                        .FILL   44
+                        .FILL   3
+
+                        .FILL   64
+                        .FILL   44
+                        .FILL   3
+
+                        .FILL   80
+                        .FILL   44
+                        .FILL   3
+
+                        .FILL   96
+                        .FILL   44
+                        .FILL   3
+
+                        .FILL   16
+                        .FILL   48
+                        .FILL   3
+
+                        .FILL   32
+                        .FILL   48
+                        .FILL   3
+
+                        .FILL   48
+                        .FILL   48
+                        .FILL   3
+
+                        .FILL   64
+                        .FILL   48
+                        .FILL   3
+
+                        .FILL   80
+                        .FILL   48
+                        .FILL   3
+
+                        .FILL   96
+                        .FILL   48
+                        .FILL   3         
+
+BRICK_MATRIX_LEN        .FILL   18
 BRICK_STRUCT_SIZE       .FILL   3
 
 MAIN_LOOP
@@ -82,6 +149,7 @@ not             r1,r1           ; |
 not             r3,r3           ; |
 brz             __NO_COLLISION
 lea             r0,BALL
+jsr             BALL_UNDO_MOVE
 jsr             BALL_ON_COLLISION
 __NO_COLLISION
 
@@ -200,12 +268,26 @@ ret
 PADDLE_COLL_WRAP_RET  .BLKW   1
 PADDLE_COLL_WRAP
 st              r7,PADDLE_COLL_WRAP_RET
+and             r1,r1,0
 and             r2,r2,0
-lea             r0,PADDLE
-lea             r1,BALL
+lea             r1,PADDLE
+lea             r0,BALL
 jsr             PADDLE_CHECK_COLL
-add             r1,r2,0
-and             r2,r2,0
+and             r1,r1,0
+add             r2,r2,0
+brz             __PADDLE_COLL_NOT
+
+lea             r1,PADDLE
+jsr             BALL_UNDO_MOVE_X
+jsr             PADDLE_CHECK_COLL
+add             r3,r2,0
+jsr             BALL_MOVE_X
+jsr             BALL_UNDO_MOVE_Y
+jsr             PADDLE_CHECK_COLL
+jsr             BALL_MOVE_Y
+add             r1,r3,0
+
+__PADDLE_COLL_NOT
 ld              r7,PADDLE_COLL_WRAP_RET
 ret
 
