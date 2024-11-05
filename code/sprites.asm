@@ -342,7 +342,7 @@ MATRIZ_COLORES          .FILL   x8000   ; Invisible
                         .FILL   x03E0   ; Verde
                         .FILL   x001F   ; Azul
                         .FILL   x2DEF   ; Gris
-                        .FILL   x1CFF   ; Celeste
+                        .FILL   x0000   ; Negro
 
 
 PANTALLA                .FILL   xC000
