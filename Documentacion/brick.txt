@@ -1,0 +1,54 @@
+LC3 BreakOut
+Brick.asm
+Este archivo contiene codigo que manaja el funcionamiento de los ladrillos, a grandes rasgo contiene las funciones que chequean sus colisiones, y su reaccion a ellas. Además de poseer sus dimensiones.
+
+
+
+Estructura en memoria
+struct ladrillo {
+	int x;
+	int y;
+	unsigned int muerto:1;
+	unsigned int estado:15;
+}
+
+
+Funciones
+BRICK_ON_COLLISION
+Es la funcion que se ejecuta cuando la pelota choca con un ladrillo. Disminuye el estado en uno y lo rerenderea acorde.
+Pseudocodigo
+void BRICK_ON_COLLISION(struct Ladrillo* ladrillo) {
+	ladrillo->estado -= 1;
+	if (ladrillo->muerto) {
+		BRICK_UNRENDER(ladrillo);
+	} else {
+		BRICK_RENDER(ladrillo);
+	}
+}
+BRICK_CHECK_COLL
+Es la funcion que chequea si la pelota colisiono con un ladrillo.
+Pseudocodigo
+void BRICK_CHECK_COLLISION(struct Ladrillo* ladrillo, struct Pelota* pelota) {
+	if (ladrillo->muerto) {
+	return false;
+}
+
+int l_x = ladrillo->x;
+int l_y = ladrillo->y;
+int p_x = BITSHIFT8_RIGHT(pelota->x);
+int p_y = BITSHIFT8_RIGHT(pelota->y);
+if (p_x + BALL_WIDTH >= l_x && p_x <= l_x + BRICK_WIDTH && p_y + BALL_HEIGHT >= l_y && p_y <= l_y + BRICK_HEIGHT) {
+	return true;
+}
+return false;
+}
+Constantes
+BRICK_HEIGHT
+El alto de los ladrillo.
+Pseudocodigo
+int BRICK_HEIGHT = 4;
+
+BRICK_WIDTH
+El ancho de los ladrillos.
+Pseudocodigo
+int BRICK_WIDTH = 16;
