@@ -6,8 +6,14 @@
 
 
     Division de Tareas
+    
 
+  La mayoria del trabajos lo hicimos en clase usando dos computadoras las cuales no cambiabamos las cuentas, esta es la causa de tanta desigualdad en la cantidad de commits por cuentas en el proyecto.
+    
   Suarez -> Programacion de los bloques y sus interacciones (brick.asm)
+  
   Pedalino Anchicha -> Programacion de la pelota y su movimiento (ball.asm)
+  
   Intelangelo -> Programacion de la paleta y su controlador (paddle.asm)
+  
   Sodo -> main, sprites y planificacion general (main.asm & sprites.asm)
