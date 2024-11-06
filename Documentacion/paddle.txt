@@ -1,0 +1,85 @@
+LC3 BreakOut
+Paddle.asm
+Este archivo contiene codigo que sirve para distintas partes del programa. En particular implementa distintos bitshifts hacia la derecha.
+
+Estructura en memoria
+struct paleta {
+	int x;
+}
+
+Funciones
+PADDLE_MOVE
+Es la funcion que se ejecuta cuando la pelota choca con un ladrillo. Disminuye el estado en uno y lo rerenderea acorde.
+Pseudocodigo
+void PADDLE_MOVE(struct Paleta* paleta) {
+	int* tieneInput = HAS_KEYBOARD_INPUT;
+	if (!*tieneInput) {
+		return;
+	}
+	
+	char input = *KEYBOARD_INPUT;
+	if (input == A_ASCII) {
+		paleta->x = paleta->x - PADDLE_VELOCITY < 0 ? 0 : paleta->x - PADDLE_VELOCITY;
+	}
+	if (input == D_ASCII) {
+		paleta->x = paleta->x + PADDLE_VELOCITY > PADDLE_MAX_X ? PADDLE_MAX_X : paleta->x + PADDLE_VELOCITY;
+	}
+}
+PADDLE_CHECK_COLL
+Es la funcion que chequea si la pelota colisiono con la pelota.
+Pseudocodigo
+void PADDLE_CHECK_COLLISION(struct Paddle* paleta, struct Pelota* pelota) {
+int paleta_x = paleta->x;
+int paleta_y = PADDLE_Y;
+int p_x = BITSHIFT8_RIGHT(pelota->x);
+int p_y = BITSHIFT8_RIGHT(pelota->y);
+if (p_x + BALL_WIDTH >= paleta_x && p_x <= paleta_x + PADDLE_WIDTH && p_y + BALL_HEIGHT >= paleta_y && p_y <= paleta_y + PADDLE_HEIGHT) {
+	return true;
+}
+return false;
+}
+Constantes
+PADDLE_HEIGHT
+El alto de la paleta.
+Pseudocodigo
+int PADDLE_HEIGHT = 4;
+
+PADDLE_WIDTH
+El ancho de la paleta.
+Pseudocodigo
+int PADDLE_WIDTH = 16;
+
+HAS_KEYBOARD_INPUT
+Direccion de la flag del input.
+Pseudocodigo
+bool* HAS_KEYBOARD_INPUT = xFE00;
+
+KEYBOARD_INPUT
+Direccion del input.
+Pseudocodigo
+char* KEYBOARD_INPUT = xFE02;
+
+A_ASCII
+Letra a.
+Pseudocodigo
+char A_ASCII = ‘a’;
+
+D_ASCII
+Letra d.
+Pseudocodigo
+char D_ASCII = ‘d’;
+
+PADDLE_VELOCITY
+Velocidad de la paleta;
+Pseudocodigo
+int PADDLE_VELOCITY = 2;
+
+PADDLE_MAX_X
+Maximo desplazamiento permitido en el eje X;
+Pseudocodigo
+int PADDLE_MAX_X = 104;
+
+PADDLE_MIN_X
+Minimo desplazamiento permitido en el eje X;
+Pseudocodigo
+int PADDLE_MIN_X = 4;
