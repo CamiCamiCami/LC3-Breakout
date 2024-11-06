@@ -1,0 +1,83 @@
+    LC3 BreakOut
+    Ball.asm
+Este archivo contiene codigo que manaja el funcionamiento de la pelota, a grandes rasgo contiene las funciones que controlan su movimiento y sus colisiones, además de poseer sus dimensiones.
+
+
+
+    Estructura en memoria
+struct pelota {
+	int x;
+	int y;
+	int vx;
+	int vy;
+}
+Todos los valores de la pelota están expresadas como racionales de punto fijo.
+Funciones
+    BALL_ON_COLLISION
+Es la funcion que se ejecuta cuando la pelota choca con una pared, un bloque o la paleta.
+Pseudocodigo
+void BALL_ON_COLLISION(struct Pelota* pelota, bool collY, bool collX) {
+	if (collY) {
+		pelota→vx = (-1) * pelota→vx;
+	}
+	if (collX) {
+		pelota→vy = (-1) * pelota→vy;
+	}
+}
+    BALL_MOVE
+Es la funcion que mueve la pelota.
+Pseudocodigo
+void BALL_MOVE(struct Pelota* p) {
+	p->x = p->x + p->vx;
+	p->y = p->y + p->vy;
+}
+
+    BALL_UNDO_MOVE
+Deshace el movimiento de la pelota (Usado para evitar que la pelota se mueva adentro de otros elementos)
+
+Pseudocodigo
+void UNDO_BALL_MOVE(struct Pelota* p) {
+	p->x = p->x - p->vx;
+	p->y = p->y - p->vy;
+}
+
+    BALL_MOVE_X
+Es la funcion que mueve la pelota exclusivamente en el eje X (Usado para el chequeo de colisiones).
+Pseudocodigo
+void BALL_MOVE_X(struct Pelota* p) {
+	p->x = p->x + p->vx;
+}
+
+    BALL_MOVE_Y
+Es la funcion que mueve la pelota exclusivamente en el eje Y (Usado para el chequeo de colisiones).
+Pseudocodigo
+void BALL_MOVE_Y(struct Pelota* p) {
+	p->y = p->y + p->vy;
+}
+
+    BALL_UNDO_MOVE_X
+Deshace el movimiento de la pelota exclusivamente en el eje X (Usado para el chequeo de colisiones).
+
+Pseudocodigo
+void UNDO_BALL_MOVE_X(struct Pelota* p) {
+	p->x = p->x - p->vx;
+}
+
+    BALL_UNDO_MOVE_Y
+Deshace el movimiento de la pelota exclusivamente en el eje Y (Usado para el chequeo de colisiones).
+
+Pseudocodigo
+void UNDO_BALL_MOVE_Y(struct Pelota* p) {
+	p->y = p->y - p->vy;
+}
+
+    Constantes
+    BALL_HEIGHT
+El alto de la pelota.
+Pseudocodigo
+int BALL_HEIGHT = 3;
+
+    BALL_WIDTH
+El ancho de la pelota.
+Pseudocodigo
+int BALL_WIDTH = 3;
